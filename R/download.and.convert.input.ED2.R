@@ -13,8 +13,8 @@ source("./download.CRUNCEP.R")
 source("./convert.CRUNCEP.R")
 source("./other.functions.R")
 
-output.folder <- "/data/gent/vo/000/gvo00074/felicien/R/climate.site/"
-all.years <- 1901:1902
+output.folder <- "/data/gent/vo/000/gvo00074/vsc44253/R/climate.site/"
+all.years <- 1901:2020
 lat <- 9.25
 lon <- -79.75
 
