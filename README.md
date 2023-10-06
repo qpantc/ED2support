@@ -113,7 +113,13 @@
    ```
 
 ## Step 4: Postprocess model
+```R
 source("post.process.ED2.outputs.R")
-Step 5: Plot model outputs
+```
+
+## Step 5: Plot model outputs
+```R
 load("./outputs/analysis.RData")
 matplot(datum$szpft$gpp[,12,c(2,3,4,18)],type = "l")
+```
+
