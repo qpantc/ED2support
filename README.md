@@ -1,6 +1,6 @@
 # Tutorial for ED2 at Ugent
 
-## Compile ED2
+## Step 1: Compile ED2
 
 1. download the model
     ```git
@@ -33,7 +33,7 @@
 6. see what you get
     > 
 
-## Preparing the driving data
+## Step 2: Preparing the driving data
 
 1. download data prepare tool
     ```git
@@ -53,7 +53,10 @@
     ```R
     source("download.and.convert.input.ED2.R")
     ```
-4. Edit ED2IN file
+
+## Step 3: Running model
+
+1. Edit ED2IN file
    - location of the simulation
    ```shell
    NL%N_POI = 1
@@ -102,13 +105,15 @@
    ```shell
    NL%SFILIN = ''
    ```
-
-
-
-
-5. run the model
+2. run the model
    > Job.sh file Or inside an interactive job
    > After load the needed modules
    ```
    ../build/ed_2.2-opt-master-8d4c3aff -f ED2IN
    ```
+
+## Step 4: Postprocess model
+source("post.process.ED2.outputs.R")
+Step 5: Plot model outputs
+load("./outputs/analysis.RData")
+matplot(datum$szpft$gpp[,12,c(2,3,4,18)],type = "l")
