@@ -16,35 +16,58 @@ rm(list = ls())
 # if (!require("BiocManager", quietly = TRUE))
 #   install.packages("BiocManager")
 # BiocManager::install("rhdf5")
+# install.packages("VoxR")
+# install.packages("survival")
 
-# Some default r files also need to be edited:
+## ==========================================================================247
+# Some default r files also need to be edited: 
 # load.everything.r (line 247)
 # loaded.package[["hdf5"       ]] = discreet.require(hdf5        )
 # must become:
 # loaded.package[["rhdf5"       ]] = discreet.require(rhdf5        )
 
-# functions magma.r and inferno.r: replace <<- by <- 
+# =============================================================================
+# comment some lines in load.everything.r
+# # loaded.package[["gpclib"      ]] = discreet.require(gpclib      )
 
-# read.q.files:    soilcp     = rep(datum$soil.prop$soilcp,nzg)
+# #envir = as.environment("package:survival")
+# #try(unlockBinding("pspline",envir),silent=TRUE)
 
-# ED2/R-utils/monthly.template.r, line 14 (mymont    = hdf5load(file=h5first,load=FALSE,verbosity=0,tidy=TRUE)) needs to be replaced with:
+# #envir = as.environment("package:ggplot2")
+# #try(unlockBinding("theme",envir),silent=TRUE)
+
+# #envir = as.environment("package:forecast")
+# #try(unlockBinding("%>%",envir),silent=TRUE)
+
+## ============================================================================
+# functions operator.r magma.r and inferno.r: replace <<- by <- 
+
+## ===========================================================================38
+# read.q.files:  replace:  soilcp     = datum$soil.prop$soilcp
+#                     to:  soilcp     = rep(datum$soil.prop$soilcp,nzg)
+
+## ===========================================================================14
+# ED2/R-utils/monthly.template.r, line 14 
+# "mymont    = hdf5load(file=h5first,load=FALSE,verbosity=0,tidy=TRUE)" needs to be replaced with:
 # mymont    = lapply(h5read_opt(h5first),FUN=aperm)
 # names(mymont) <- gsub(x = names(mymont), pattern = "\\_", replacement = ".")
 
-# ED2/R-utils/read.q.files.r, line 113 ( mymont    = hdf5load(file=h5file,load=FALSE,verbosity=0,tidy=TRUE)) needs to be replaced with:
+## ===========================================================================113
+# ED2/R-utils/read.q.files.r, line 113 
+# "mymont    = hdf5load(file=h5file,load=FALSE,verbosity=0,tidy=TRUE)" needs to be replaced with:
 # mymont    = lapply(h5read_opt(h5file),FUN=aperm)
 # names(mymont) <- gsub(x = names(mymont), pattern = "\\_", replacement = ".")
 
 # Then we read the outputs files with the read_and_plot_ED2.2_all_tspft function
 
-source("/data/gent/vo/000/gvo00074/felicien/R/h5read_opt.r")
-source("/data/gent/vo/000/gvo00074/felicien/R/read_and_save_ED2.2.R")
+source("./h5read_opt.r")
+source("./read_and_save_ED2.2.R")
 
-read_and_save_ED2.2(there = '/kyukon/scratch/gent/vo/000/gvo00074/felicien/BCI/analy/', # path to the analy outputs (Q files)
+read_and_save_ED2.2(there = '/scratch/gent/vo/000/gvo00074/vsc44253/ED_results/BCI/analy/', # path to the analy outputs (Q files)
                               place = 'analysis',                                              # output name
                               yeara = '1901/01/01',                                                 # first year/month to process
                               yearz = '1903/01/01',                                                 # last year/month (+ 1) to process
-                              ED2srcdir = "/user/scratchkyukon/gent/gvo000/gvo00074/felicien/ED2.2model/ED2/R-utils")
+                              ED2srcdir = "/scratch/gent/vo/000/gvo00074/vsc44253/ED2.2/ED2/R-utils")
 
 # ED2srcdir is the location of the R-utils library from the github ED2 repository
 # read_and_plot_ED2.2_all_tspft function generates a .RData file + figures
