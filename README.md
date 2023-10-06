@@ -1,4 +1,4 @@
-# Tutorial for ED2 at Ugent
+# Tutorial for ED2 at Ugent HPC
 
 ## Step 1: Compile ED2
 
