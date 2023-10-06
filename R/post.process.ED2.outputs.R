@@ -41,10 +41,18 @@ rm(list = ls())
 
 ## ============================================================================
 # functions operator.r magma.r and inferno.r: replace <<- by <- 
+# for operator only first part
 
 ## ===========================================================================38
 # read.q.files:  replace:  soilcp     = datum$soil.prop$soilcp
 #                     to:  soilcp     = rep(datum$soil.prop$soilcp,nzg)
+
+# ED2/R-utils/read.q.files.r, line 113 
+# "mymont    = hdf5load(file=h5file,load=FALSE,verbosity=0,tidy=TRUE)" needs to be replaced with:
+# mymont    = lapply(h5read_opt(h5file),FUN=aperm)
+# names(mymont) <- gsub(x = names(mymont), pattern = "\\_", replacement = ".")
+
+
 
 ## ===========================================================================14
 # ED2/R-utils/monthly.template.r, line 14 
@@ -52,11 +60,7 @@ rm(list = ls())
 # mymont    = lapply(h5read_opt(h5first),FUN=aperm)
 # names(mymont) <- gsub(x = names(mymont), pattern = "\\_", replacement = ".")
 
-## ===========================================================================113
-# ED2/R-utils/read.q.files.r, line 113 
-# "mymont    = hdf5load(file=h5file,load=FALSE,verbosity=0,tidy=TRUE)" needs to be replaced with:
-# mymont    = lapply(h5read_opt(h5file),FUN=aperm)
-# names(mymont) <- gsub(x = names(mymont), pattern = "\\_", replacement = ".")
+
 
 # Then we read the outputs files with the read_and_plot_ED2.2_all_tspft function
 
