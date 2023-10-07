@@ -1,3 +1,6 @@
 
+outputs/*.h5
+outputs/*.RData
+
 .Rproj*
 .Rproj.user
