@@ -63,11 +63,13 @@ rm(list = ls())
 
 
 # Then we read the outputs files with the read_and_plot_ED2.2_all_tspft function
+## working dir "./EDsupport/R/"
 
 source("./h5read_opt.r")
 source("./read_and_save_ED2.2.R")
 
-read_and_save_ED2.2(there = '/scratch/gent/vo/000/gvo00074/vsc44253/Results/ED2/BCI/analy', # path to the analy outputs (Q files)
+# /scratch/gent/vo/000/gvo00074/vsc44253/Results/ED2/BCI/analy
+read_and_save_ED2.2(there = '../output/Results/ED2/BCI/analy', # path to the analy outputs (Q files)
                               place = 'analysis',                                              # output name
                               yeara = '1901/01/01',                                                 # first year/month to process
                               yearz = '2011/01/01',                                                 # last year/month (+ 1) to process
