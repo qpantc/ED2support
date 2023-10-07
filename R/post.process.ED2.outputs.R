@@ -4,23 +4,27 @@ rm(list = ls())
 # Step 0) to do, only once
 
 # These packages need to be installed first:
-# install.packages(c("abind", "agricolae", "akima", "beanplot", "boot", "callr", "car",
+# need_packages <- c("abind", "agricolae", "akima", "beanplot", "boot", "callr", "car",
 #                    "caTools", "chron", "cluster", "compiler", "data.table", "devtools",
 #                    "FAdist", "fields", "gbm", "gdalUtils", "geoR", "gpclib", "grDevices",
 #                    "gstat", "Hmisc", "klaR", "kriging", "leaps", "maps", "mapdata",
 #                    "maptools", "MASS", "MCMCpack", "nlme", "numDeriv", "onls", "PBSmapping",
 #                    "plotrix", "pls", "proto", "raster", "rgdal", "rgeos", "rlas", "robustbase",
-#                    "rworldmap", "RSEIS", "R.utils","smatr"))
+#                    "rworldmap", "RSEIS", "R.utils","smatr","VoxR","survival")
+#
+# for (package in need_packages) {
+#   if(!package %in% rownames(installed.packages())){install.packages(package)}
+# }
+
 #
 # rhdf5 is a specific package that needs to be installed separately
 # if (!require("BiocManager", quietly = TRUE))
 #   install.packages("BiocManager")
 # BiocManager::install("rhdf5")
-# install.packages("VoxR")
-# install.packages("survival")
+
 
 ## ==========================================================================247
-# Some default r files also need to be edited: 
+# Some default r files also need to be edited:
 # load.everything.r (line 247)
 # loaded.package[["hdf5"       ]] = discreet.require(hdf5        )
 # must become:
@@ -40,14 +44,14 @@ rm(list = ls())
 # #try(unlockBinding("%>%",envir),silent=TRUE)
 
 ## ============================================================================
-# functions operator.r magma.r and inferno.r: replace <<- by <- 
+# functions operator.r magma.r and inferno.r: replace <<- by <-
 # for operator only first part
 
 ## ===========================================================================38
 # read.q.files:  replace:  soilcp     = datum$soil.prop$soilcp
 #                     to:  soilcp     = rep(datum$soil.prop$soilcp,nzg)
 
-# ED2/R-utils/read.q.files.r, line 113 
+# ED2/R-utils/read.q.files.r, line 113
 # "mymont    = hdf5load(file=h5file,load=FALSE,verbosity=0,tidy=TRUE)" needs to be replaced with:
 # mymont    = lapply(h5read_opt(h5file),FUN=aperm)
 # names(mymont) <- gsub(x = names(mymont), pattern = "\\_", replacement = ".")
@@ -55,7 +59,7 @@ rm(list = ls())
 
 
 ## ===========================================================================14
-# ED2/R-utils/monthly.template.r, line 14 
+# ED2/R-utils/monthly.template.r, line 14
 # "mymont    = hdf5load(file=h5first,load=FALSE,verbosity=0,tidy=TRUE)" needs to be replaced with:
 # mymont    = lapply(h5read_opt(h5first),FUN=aperm)
 # names(mymont) <- gsub(x = names(mymont), pattern = "\\_", replacement = ".")
@@ -69,10 +73,12 @@ source("./h5read_opt.r")
 source("./read_and_save_ED2.2.R")
 
 # /scratch/gent/vo/000/gvo00074/vsc44253/Results/ED2/BCI/analy
-read_and_save_ED2.2(there = '../output/Results/ED2/BCI/analy', # path to the analy outputs (Q files)
+# /Users/tiacc/projects/ED2.2/EDsupport/outputs/Results/BCI/analy
+# "../output/Results/BCI/analy"
+read_and_save_ED2.2(there = '/Users/tiacc/projects/ED2.2/EDsupport/outputs/Results/BCI/analy', # path to the analy outputs (Q files)
                               place = 'analysis',                                              # output name
                               yeara = '1901/01/01',                                                 # first year/month to process
-                              yearz = '2011/01/01',                                                 # last year/month (+ 1) to process
+                              yearz = '1903/01/01',                                                 # last year/month (+ 1) to process
                               ED2srcdir = "../R-utils")
 
 # ED2srcdir is the location of the R-utils library from the github ED2 repository
