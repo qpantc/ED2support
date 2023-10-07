@@ -72,7 +72,7 @@ rm(list = ls())
 source("./h5read_opt.r")
 source("./read_and_save_ED2.2.R")
 
-# /scratch/gent/vo/000/gvo00074/vsc44253/Results/ED2/BCI/analy
+# /scratch/gent/vo/000/gvo00074/vsc44253/ED2.2/EDsupport/outputs/Results/BCI/analy
 # /Users/tiacc/projects/ED2.2/EDsupport/outputs/Results/BCI/analy
 # "../output/Results/BCI/analy"
 read_and_save_ED2.2(there = '/Users/tiacc/projects/ED2.2/EDsupport/outputs/Results/BCI/analy', # path to the analy outputs (Q files)
