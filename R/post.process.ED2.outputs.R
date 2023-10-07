@@ -71,6 +71,7 @@ rm(list = ls())
 
 source("./h5read_opt.r")
 source("./read_and_save_ED2.2.R")
+source("./read_save_plot_ED2.2.R")
 
 # /scratch/gent/vo/000/gvo00074/vsc44253/ED2.2/EDsupport/outputs/Results/BCI/analy
 # /Users/tiacc/projects/ED2.2/EDsupport/outputs/Results/BCI/analy
@@ -80,6 +81,18 @@ read_and_save_ED2.2(there = '/scratch/gent/vo/000/gvo00074/vsc44253/ED2.2/EDsupp
                               yeara = '1901/01/01',                                                 # first year/month to process
                               yearz = '2011/01/01',                                                 # last year/month (+ 1) to process
                               ED2srcdir = "../R-utils")
+
+# read_and_save_ED2.2(there = '/Users/tiacc/projects/ED2.2/EDsupport/outputs/Results/BCI/analy', # path to the analy outputs (Q files)
+#                     place = 'analysis',                                              # output name
+#                     yeara = '1901/01/01',                                                 # first year/month to process
+#                     yearz = '1903/01/01',                                                 # last year/month (+ 1) to process
+#                     ED2srcdir = "../R-utils")
+
+# read_and_plot_ED2_Q2R(there = '/Users/tiacc/projects/ED2.2/EDsupport/outputs/Results/BCI/analy', # path to the analy outputs (Q files)
+#                     place = 'analysis',                                              # output name
+#                     yeara = '1901/01/01',                                                 # first year/month to process
+#                     yearz = '1903/01/01',                                                 # last year/month (+ 1) to process
+#                     ED2srcdir = "../R-utils")
 
 # ED2srcdir is the location of the R-utils library from the github ED2 repository
 # read_and_plot_ED2.2_all_tspft function generates a .RData file + figures
