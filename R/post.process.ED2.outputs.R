@@ -71,7 +71,7 @@ read_and_save_ED2.2(there = '/scratch/gent/vo/000/gvo00074/vsc44253/Results/ED2/
                               place = 'analysis',                                              # output name
                               yeara = '1901/01/01',                                                 # first year/month to process
                               yearz = '2011/01/01',                                                 # last year/month (+ 1) to process
-                              ED2srcdir = "/scratch/gent/vo/000/gvo00074/vsc44253/ED2.2/ED2/R-utils")
+                              ED2srcdir = "/scratch/gent/vo/000/gvo00074/vsc44253/ED2.2/EDsupport/R-utils")
 
 # ED2srcdir is the location of the R-utils library from the github ED2 repository
 # read_and_plot_ED2.2_all_tspft function generates a .RData file + figures
