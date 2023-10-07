@@ -45,8 +45,7 @@
 2. load R module, cd to script dir and run R
     > `ml av R` see module suitable for R
     ```shell
-    ml purge; 
-    ml R-bundle-Bioconductor/3.15-foss-2021b-R-4.2.0 
+    ml purge; ml R-bundle-Bioconductor/3.15-foss-2021b-R-4.2.0 
     
     cd ED2support/R
     R
@@ -89,7 +88,7 @@
     NL%LU_DATABASE = ''
     NL%PLANTATION_FILE = ''
     NL%THSUMS_DATABASE = '/user/data/gent/gvo000/gvo00074/ED_common_data/ed_inputs/'
-    NL%ED_MET_DRIVER_DB = '/user/gent/442/vsc44253/site.lat9.25N.lon79.75W/ED2/ED_MET_DRIVER_HEADER'
+    NL%ED_MET_DRIVER_DB = '/data/gent/vo/000/gvo00074/vsc44253/R/climate.site/site.lat9.25N.lon79.75W/ED2/ED_MET_DRIVER_HEADER'
     NL%SOILSTATE_DB = ''
     NL%SOILDEPTH_DB = ''
     ```
