@@ -1,4 +1,5 @@
 outputs/*.Rdata
+outputs/*.h5
 
 .Rproj*
 .Rproj.user
