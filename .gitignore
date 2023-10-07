@@ -1,5 +1,5 @@
 
-outputs/*.h5
+outputs/Results/*
 outputs/*.RData
 
 .Rproj*
