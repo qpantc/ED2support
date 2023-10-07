@@ -67,7 +67,7 @@ rm(list = ls())
 source("./h5read_opt.r")
 source("./read_and_save_ED2.2.R")
 
-read_and_save_ED2.2(there = '/scratch/gent/vo/000/gvo00074/vsc44253/ED_results/BCI/analy/', # path to the analy outputs (Q files)
+read_and_save_ED2.2(there = '/scratch/gent/vo/000/gvo00074/vsc44253/Results/ED2/BCI/analy', # path to the analy outputs (Q files)
                               place = 'analysis',                                              # output name
                               yeara = '1901/01/01',                                                 # first year/month to process
                               yearz = '2011/01/01',                                                 # last year/month (+ 1) to process
