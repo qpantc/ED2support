@@ -1,5 +1,4 @@
 outputs/*.Rdata
-# outputs/Results/*
 
 .Rproj*
 .Rproj.user
