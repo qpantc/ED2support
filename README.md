@@ -110,6 +110,9 @@
    ```shell
    NL%SFILIN = ''
    ```
+
+   - set included PFTs
+   
 2. 
 
 ## Step 4: Run and postprocess model
