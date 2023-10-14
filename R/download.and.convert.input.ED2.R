@@ -14,8 +14,8 @@ source("./download.CRUNCEP.R")
 source("./convert.CRUNCEP.R")
 source("./other.functions.R")
 
-output.folder <- "../run/BCI/histo/inputs/driver/climate.site/" #"/data/gent/vo/000/gvo00074/vsc44253/R/climate.site/"
-all.years <- 1901:2010
+output.folder <- "../run/BCI_histo/inputs/driver/" #"/data/gent/vo/000/gvo00074/vsc44253/R/climate.site/"
+all.years <- 1981:2010
 lat <- 9.25
 lon <- -79.75
 
