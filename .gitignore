@@ -1,6 +1,5 @@
-
-outputs/Results/*
-outputs/*.RData
-
 .Rproj*
 .Rproj.user
+
+run/BCI_histo/inputs/driver/*
+run/BCI_histo/outputs/Results/*

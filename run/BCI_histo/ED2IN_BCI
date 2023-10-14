@@ -92,7 +92,7 @@ $ED_NL
    !---------------------------------------------------------------------------------------!
    NL%IMONTHA = 1
    NL%IDATEA = 1
-   NL%IYEARA = 1901
+   NL%IYEARA = 1981
    NL%ITIMEA = 0
    !---------------------------------------------------------------------------------------!
 
@@ -374,8 +374,8 @@ $ED_NL
    ! SFILOUT -- Path and prefix for history files.                                         !
    !---------------------------------------------------------------------------------------!
 
-   NL%FFILOUT = '/scratch/gent/vo/000/gvo00074/vsc44253/ED2.2/EDsupport/outputs/Results/BCI/analy/analysis'
-   NL%SFILOUT = '/scratch/gent/vo/000/gvo00074/vsc44253/ED2.2/EDsupport/outputs/Results/BCI/histo/history'
+   NL%FFILOUT = '/scratch/gent/vo/000/gvo00074/vsc44253/ED2.2/EDsupport/run/BCI_histo/outputs/BCI/analy/analysis'
+   NL%SFILOUT = '/scratch/gent/vo/000/gvo00074/vsc44253/ED2.2/EDsupport/run/BCI_histo/outputs/BCI/histo/history'
 
    !---------------------------------------------------------------------------------------!
 
@@ -629,7 +629,7 @@ $ED_NL
    NL%LU_DATABASE = ''
    NL%PLANTATION_FILE = ''
    NL%THSUMS_DATABASE = '/user/data/gent/gvo000/gvo00074/ED_common_data/ed_inputs/'
-   NL%ED_MET_DRIVER_DB = '/scratch/gent/vo/000/gvo00074/vsc44253/ED2.2/EDsupport/outputs/driver/climate.site/site.lat9.25N.lon79.75W/ED2/ED_MET_DRIVER_HEADER'
+   NL%ED_MET_DRIVER_DB = '/scratch/gent/vo/000/gvo00074/vsc44253/ED2.2/EDsupport/run/BCI_histo/inputs/driver/climate.site/site.lat9.25N.lon79.75W/ED2/ED_MET_DRIVER_HEADER'
    NL%SOILSTATE_DB = ''
    NL%SOILDEPTH_DB = ''
    !---------------------------------------------------------------------------------------!

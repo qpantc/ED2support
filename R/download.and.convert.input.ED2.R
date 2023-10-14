@@ -14,7 +14,7 @@ source("./download.CRUNCEP.R")
 source("./convert.CRUNCEP.R")
 source("./other.functions.R")
 
-output.folder <- "../output/driver/climate.site/" #"/data/gent/vo/000/gvo00074/vsc44253/R/climate.site/"
+output.folder <- "../run/BCI/histo/inputs/driver/climate.site/" #"/data/gent/vo/000/gvo00074/vsc44253/R/climate.site/"
 all.years <- 1901:2010
 lat <- 9.25
 lon <- -79.75
@@ -22,14 +22,9 @@ lon <- -79.75
 #######################################################################
 # No change beyond this point
 
-dir.create(output.folder,
-           showWarnings = FALSE)
+dir.create(output.folder,showWarnings = FALSE)
 
-site.folder <- download.CRUNCEP(output.folder,
-                                years = all.years,
-                                lat.in = lat,
-                                lon.in = lon,
-                                verbose = FALSE)
+site.folder <- download.CRUNCEP(output.folder,years = all.years,lat.in = lat,lon.in = lon,verbose = FALSE)
 
 convert.CRUNCEP(in.path = file.path(site.folder),
                 in.prefix = "CRUNCEP",
