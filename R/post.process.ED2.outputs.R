@@ -69,9 +69,9 @@ rm(list = ls())
 # Then we read the outputs files with the read_and_plot_ED2.2_all_tspft function
 ## working dir "./EDsupport/R/"
 
-source("./h5read_opt.r")
-source("./read_and_save_ED2.2.R")
-source("./read_save_plot_ED2.2.R")
+source("./function/h5read_opt.r")
+source("./function/read_and_save_ED2.2.R")
+source("./function/read_save_plot_ED2.2.R")
 
 # /scratch/gent/vo/000/gvo00074/vsc44253/ED2.2/EDsupport/outputs/Results/BCI/analy
 # /Users/tiacc/projects/ED2.2/EDsupport/outputs/Results/BCI/analy
