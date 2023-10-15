@@ -629,7 +629,9 @@ $ED_NL
    NL%LU_DATABASE = ''
    NL%PLANTATION_FILE = ''
    NL%THSUMS_DATABASE = '/user/data/gent/gvo000/gvo00074/ED_common_data/ed_inputs/'
-   NL%ED_MET_DRIVER_DB = '/scratch/gent/vo/000/gvo00074/vsc44253/ED2.2/EDsupport/run/BCI_histo/inputs/driver/climate.site/site.lat9.25N.lon79.75W/ED2/ED_MET_DRIVER_HEADER'
+   NL%ED_MET_DRIVER_DB = 
+   '/kyukon/scratch/gent/vo/000/gvo00074/vsc44253/ED2.2/EDsupport/run/BCI_histo/inputs/driver/site.lat9.25N.lon79.75W/ED2/'
+   '/scratch/gent/vo/000/gvo00074/vsc44253/ED2.2/EDsupport/run/BCI_histo/inputs/driver/site.lat9.25N.lon79.75W/ED2/ED_MET_DRIVER_HEADER'
    NL%SOILSTATE_DB = ''
    NL%SOILDEPTH_DB = ''
    !---------------------------------------------------------------------------------------!
