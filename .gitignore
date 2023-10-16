@@ -3,3 +3,5 @@
 
 run/BCI_histo/c/driver/*
 run/BCI_histo/outputs/Results/*
+tower/sites/*
+tower/data/*
