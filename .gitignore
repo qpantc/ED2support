@@ -1,5 +1,6 @@
 .Rproj*
 .Rproj.user
+.Rhistory
 
 run/BCI_histo/c/driver/*
 run/BCI_histo/outputs/Results/*
