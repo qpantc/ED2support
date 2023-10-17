@@ -24,9 +24,9 @@ if (! all(c(isok.chron,isok.rhdf5))){
   cat(" Package \"rhdf5\" was found: ",isok.rhdf5,".","\n",sep="")
   stop("Install missing packages before running this script.")
 }#end if (! all(c(isok.chron,isok.rhdf5)))
-source("./timeutils.r")
-source("./radutils.r")
-source("./data.from.fluxnet.R")
+source("./function/timeutils.r")
+source("./function/radutils.r")
+source("./function/data.from.fluxnet.R")
 summary(datum)
 #------------------------------------------------------------------------------------------#
 #    List of places, with the name, first and last full years, and the output variable .   #
