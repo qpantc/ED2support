@@ -2,19 +2,31 @@
 # Calculate absolute_humidity with  temperature  and relative_humidity                     #
 #------------------------------------------------------------------------------------------#
 
-absolute_humidity <- function(temperature = 25,relative_humidity = 50){
-  R = 287.05 # Specific gas constant for dry air (J/(kg*K))
-  eps = 0.622 # Ratio of the molecular weight of water vapor to dry air
-  (eps * (relative_humidity / 100) * 6.112 * exp((17.67 * temperature) / (temperature + 243.5))) /
-    (R * (temperature + 273.15))
+absolute_humidity <- function(atmospheric_pressure_kpa = 101.3, temperature_celsius = 25,relative_humidity = 50){
+  # Atmospheric pressure in kPa
+
+  # Convert temperature to Kelvin
+  temperature_kelvin <- temperature_celsius + 273.15
+
+  # Calculate the saturation vapor pressure (es) in kPa
+  es <- 0.611 * exp((17.27 * temperature_celsius) / (temperature_celsius + 237.3))
+
+  # Calculate the actual vapor pressure (ea) in kPa
+  ea <- (relative_humidity / 100) * es
+
+  # Calculate the specific humidity (water content per kilogram of dry air) in Kg H2O/Kg dry air
+  specific_humidity <- (0.622 * ea) / (atmospheric_pressure_kpa - (0.378 * ea))
+
+  return(specific_humidity)
 }
+
 
 
 #------------------------------------------------------------------------------------------#
 # Calculate rain in kg/m2/s by unit mm per half hour                                       #
 #------------------------------------------------------------------------------------------#
-rainfall_kg_m2_s1 <- function(rain){
-  rainfall <- (rain * 0.000001) / 1800
+rainfall_kg_m2_s1 <- function(rain_mm){
+  rainfall <- rain_mm / 1800
   return(rainfall)
 }
 
@@ -50,7 +62,7 @@ fluxnet_vesion_data <- function(file.in){
 
   fluxnet_data$atm.tmp <- fluxnet_data$TA_F + 273.15 # unit: K
   fluxnet_data$atm.prss <- fluxnet_data$PA_F*1000 #unit: Pa
-  fluxnet_data$atm.shv <- absolute_humidity(fluxnet_data$TA_F,fluxnet_data$RH) #unit: "kgH2O kgAir⁻¹"
+  fluxnet_data$atm.shv <- absolute_humidity(fluxnet_data$PA_F,fluxnet_data$TA_F,fluxnet_data$RH) #unit: "kgH2O kgAir⁻¹"
   fluxnet_data$atm.vels <- fluxnet_data$WS_F
   fluxnet_data$atm.vdir <- fluxnet_data$WD
   fluxnet_data$rain <- rainfall_kg_m2_s1(fluxnet_data$P_F) # unit: kg/m2*s1

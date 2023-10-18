@@ -27,7 +27,6 @@ if (! all(c(isok.chron,isok.rhdf5))){
 source("./function/timeutils.r")
 source("./function/radutils.r")
 source("./function/data.from.fluxnet.R")
-summary(datum)
 #------------------------------------------------------------------------------------------#
 #    List of places, with the name, first and last full years, and the output variable .   #
 #                                                                                          #
