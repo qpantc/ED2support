@@ -8,7 +8,7 @@
 
 ## ======================================================== initial setting of variables and dirs
 rm(list=ls())
-setwd("/Users/quan/projects/ED2.2/EDsupport/tower/")
+setwd("/Users/quan/projects/ED2.2/EDsupport/support/tower/")
 here    = getwd()                  # Current directory.
 outpath = file.path(here,"sites")  # Output path
 if (! file.exists(outpath)) dir.create(outpath)
