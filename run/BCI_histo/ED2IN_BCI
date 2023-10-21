@@ -624,6 +624,7 @@ $ED_NL
    !  SOILDEPTH_DB     -- If ISOILDEPTHFLG=1, this variable specifies the full path of the !
    !                      file that contains soil moisture and temperature information.    !
    !---------------------------------------------------------------------------------------!
+   ! /user/data/gent/gvo000/gvo00074/ED_common_data/ed_inputs/
    NL%VEG_DATABASE = '/user/data/gent/gvo000/gvo00074/ED_common_data/veg_oge/OGE2_'
    NL%SOIL_DATABASE = '/user/data/gent/gvo000/gvo00074/ED_common_data/soils/FAO/FAO_'
    NL%LU_DATABASE = ''

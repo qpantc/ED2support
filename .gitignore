@@ -4,5 +4,9 @@
 
 run/BCI_histo/c/driver/*
 run/BCI_histo/outputs/Results/*
+
 support/tower/sites/*
 support/tower/data/*
+
+support/pss_css/sites/*
+support/pss_css/inventory_data/*
