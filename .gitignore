@@ -10,3 +10,6 @@ support/tower/data/*
 
 support/pss_css/sites/*
 support/pss_css/inventory_data/*
+
+support/pecan/outputs/*
+support/pecan/run/*

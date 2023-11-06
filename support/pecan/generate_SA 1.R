@@ -2,9 +2,9 @@ rm(list = ls())
 
 # To be run on the cluster
 
-# devtools::install_github("pecanproject/pecan", subdir = 'base/utils')
-# devtools::install_github("pecanproject/pecan", subdir = 'models/ed')
-# devtools::install_github("femeunier/ED2scenarios")
+# remotes::install_github("pecanproject/pecan", subdir = 'models/ed')
+# remotes::install_github("pecanproject/pecan", subdir = 'base/utils')
+# remotes::install_github("femeunier/ED2scenarios")
 
 # Libraries
 library(dplyr)
@@ -14,12 +14,39 @@ library(ED2scenarios)
 library(PEcAn.ED2)
 library(BayesianTools)
 
-# Directories
-ref_dir <- "/user/scratchkyukon/gent/gvo000/gvo00074/felicien/ED2_soil/ED2/ED/run"
-ed2in <- read_ed2in(file.path(ref_dir,"ED2IN_YGB_new"))  # reference ED2IN file
+# Description ----------------------------------------------------------------------------------------------------
+# setwd('./support/pecan/')
 
-rundir <- "/user/scratchkyukon/gent/gvo000/gvo00074/felicien/ED2_soil/ED2/ED/run/test"   # Directory for the run folders
-outdir <- "/kyukon/scratch/gent/vo/000/gvo00074/felicien/YGB/SA"                       # Directory for the outfolders folders
+
+run_name <- "SA_reference"
+nodes = 1;ppn = 18;mem = 16;walltime = 3   # job config
+
+prerun = "ml purge ; ml intel-compilers/2021.4.0 HDF5/1.12.1-iimpi-2021b UDUNITS/2.2.28-GCCcore-11.2.0; ulimit -s unlimited" # modules to load
+ed_exec = "/scratch/gent/vo/000/gvo00074/vsc44253/ED2.2/ED2/ED/build/ed_2.2-opt-master-8d4c3aff" # ED2 executable name
+Rplot_function = '/scratch/gent/vo/000/gvo00074/vsc44253/ED2.2/EDsupport/R/read_save_plot_ED2.2.R'   # postprocessing R file
+
+
+# Directories  ----------------------------------------------------------------------------------------------------
+ref_dir <- "./example"
+ed2in <- read_ed2in(file.path(ref_dir,"ED2IN_"))  # reference ED2IN file
+
+rundir <- './run'  # Directory for the run folders
+outdir <- './outputs'   # Directory for the output folders
+# rundir <- "/user/scratchkyukon/gent/gvo000/gvo00074/felicien/ED2_soil/ED2/ED/run/test"   # Directory for the run folders
+# outdir <- "/kyukon/scratch/gent/vo/000/gvo00074/felicien/YGB/SA"                       # Directory for the outfolders folders
+
+
+run_ref <- file.path(rundir,run_name)
+out_ref <- file.path(outdir,run_name)
+
+if(!dir.exists(rundir)) dir.create(rundir)
+if(!dir.exists(outdir)) dir.create(outdir)
+
+if(!dir.exists(run_ref)) dir.create(run_ref)
+if(!dir.exists(out_ref)) dir.create(out_ref)
+if(!dir.exists(file.path(out_ref,"analy"))) dir.create(file.path(out_ref,"analy"))
+if(!dir.exists(file.path(out_ref,"histo"))) dir.create(file.path(out_ref,"histo"))
+
 
 # Parameters d
 # Priors
@@ -107,16 +134,8 @@ quantiles <- c(0.025,0.16,0.25,0.75,0.84,0.975)
 # Reference run
 
 # Directories
-run_name <- "SA_reference"
 isimu = isimu + 1
 
-run_ref <- file.path(rundir,run_name)
-out_ref <- file.path(outdir,run_name)
-
-if(!dir.exists(run_ref)) dir.create(run_ref)
-if(!dir.exists(out_ref)) dir.create(out_ref)
-if(!dir.exists(file.path(out_ref,"analy"))) dir.create(file.path(out_ref,"analy"))
-if(!dir.exists(file.path(out_ref,"histo"))) dir.create(file.path(out_ref,"histo"))
 
 # ED2IN file
 ed2in_scenar <- ed2in
@@ -170,15 +189,14 @@ if (isimu == 1){
 } else{
   isfirstjob = FALSE
 }
-
 # Write job file
 write_joblauncher(file = file.path(dir_joblauncher,"job.sh"), # job file name
-                  nodes = 1,ppn = 18,mem = 16,walltime = 3,   # job config
-                  prerun = "ml purge; ml UDUNITS/2.2.26-intel-2018a R/3.4.4-intel-2018a-X11-20180131 HDF5/1.10.1-intel-2018a; ulimit -s unlimited",  # modules to load
+                  nodes = nodes,ppn = ppn,mem = mem, walltime = walltime,   # job config
+                  prerun = prerun,  # modules to load
                   CD = run_ref,  # path to the run folder
-                  ed_exec = "/user/scratchkyukon/gent/gvo000/gvo00074/felicien/EDlatest/ED2/ED/build/ed_2.2-opt-master-43d3df2", # ED2 executable name
+                  ed_exec = ed_exec, # ED2 executable name
                   ED2IN = "ED2IN", # ED2IN name
-                  Rplot_function = '/data/gent/vo/000/gvo00074/felicien/R/read_and_plot_ED2.2_all_tspft.r',   # postprocessing R file
+                  Rplot_function = Rplot_function,   # postprocessing R file
                   firstjob = isfirstjob,
                   clean = TRUE  # Do you want to clean some of the outputs
 )
@@ -212,51 +230,51 @@ for (iparam in seq(1,Nparam)){
     ed2in_scenar$SFILOUT = file.path(out_ref,"histo","history")
 
     write_ed2in(ed2in_scenar,filename = file.path(run_ref,"ED2IN"))
-    
+
     # Config
     config_simu <- config_reference
-    
+
     for (iparam2 in seq(1,Nparam)){
-      
+
       param_name = param_names[iparam2]
-      
+
       if (param_name == param_names[iparam]){
         if (param_names[iparam] == "Vm0"){ # Pft specific case
-          
+
           param0 <- quantile(prior[[iparam]]$sample(n = 100000),quantiles[iquantile])
           delta_param <- median(prior[[paste0("Delta_",param_name)]]$sample(n = 100000))
-          
+
           params <- param0 - delta_param*c(0,1,2)
           params_actual <- pmax(pmin(params,global_max[param_name]),global_min[param_name])
-          
+
         } else if (param_names[iparam] == "Delta_Vm0"){ # We skip the delta
 
           param0 <- median(prior[["Vm0"]]$sample(n = 100000))
           delta_param <- quantile(prior[[paste0("Delta_Vm0")]]$sample(n = 100000),quantiles[iquantile])
-          
+
           params <- param0 - delta_param*c(0,1,2)
           param_name <- "Vm0"
           params_actual <- pmax(pmin(params,global_max[param_name]),global_min[param_name])
 
-          
+
         } else { # Default case
           samples <- prior[[iparam]]$sample(n = 100000)
           params_actual <- rep(quantile(samples,quantiles[iquantile]),3)
         }
-        
+
         for (ipft in seq(1,length(params_actual))){
           config_simu[[ipft]][param_name] <- params_actual[ipft]
         }
       }
     }
-    
+
     xml <- write.config.xml.ED2(defaults = defaults,
                                 settings = settings,
                                 trait.values = config_simu)
-    
+
     XML::saveXML(xml, file = file.path(run_ref,"config.xml"), indent = TRUE,
                  prefix = PREFIX_XML)
-    
+
 
     # job.sh
 
@@ -269,12 +287,12 @@ for (iparam in seq(1,Nparam)){
     }
 
     write_joblauncher(file = file.path(dir_joblauncher,"job.sh"),
-                      nodes = 1,ppn = 18,mem = 16,walltime = 3,
-                      prerun = "ml purge; ml UDUNITS/2.2.26-intel-2018a R/3.4.4-intel-2018a-X11-20180131 HDF5/1.10.1-intel-2018a; ulimit -s unlimited",
-                      CD = run_ref,
-                      ed_exec = "/user/scratchkyukon/gent/gvo000/gvo00074/felicien/EDlatest/ED2/ED/build/ed_2.2-opt-master-43d3df2",
-                      ED2IN = "ED2IN",
-                      Rplot_function = '/data/gent/vo/000/gvo00074/felicien/R/read_and_plot_ED2.2_all_tspft.r',
+                      nodes = nodes,ppn = ppn,mem = mem, walltime = walltime,   # job config
+                      prerun = prerun,  # modules to load
+                      CD = run_ref,  # path to the run folder
+                      ed_exec = ed_exec, # ED2 executable name
+                      ED2IN = "ED2IN", # ED2IN name
+                      Rplot_function = Rplot_function,   # postprocessing R file
                       firstjob = isfirstjob,clean = TRUE)
 
     if (isimu >= Nsimuperjob){
@@ -286,7 +304,6 @@ for (iparam in seq(1,Nparam)){
 dumb <- write_bash_submission(file = file.path(rundir,"all_jobs_SA.sh"),
                               list_files = list_dir,
                               job_name = "job.sh")
-
 
 # To transfer the files
 # scp /home/femeunier/Documents/projects/ED2sahel/generate_SA.R hpc:/data/gent/vo/000/gvo00074/felicien/R
