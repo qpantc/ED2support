@@ -15,7 +15,7 @@ library(PEcAn.ED2)
 library(BayesianTools)
 
 # Description ----------------------------------------------------------------------------------------------------
-# setwd('./support/pecan/')
+setwd('./support/pecan/')
 
 
 run_name <- "SA_reference"
@@ -156,7 +156,7 @@ for (iparam in seq(1,Nparam)){
     delta_param <- median(prior[[paste0("Delta_",param_name)]]$sample(n = 100000))
 
     params <- param0 - delta_param*c(0,1,2)
-    params_actual <- pmax(pmin(params,global_max[param_name]),global_min[param_name])
+    params_actual <- pmax(pmin(params,global_max[param_name]),global_min[param_name]) # follows the global limitation
 
   } else if (param_names[iparam] == "Delta_Vm0"){ # We skip the delta
     next()

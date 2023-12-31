@@ -12,10 +12,10 @@ source("./met2CF.ERA5.R")
 
 slat = 1.
 slon = 24.5
-in.path = "/data/gent/vo/000/gvo00074/ED_common_data/met/CB/"
-start_date = "1960-01-01"
-end_date = "2019-12-31"
-outfolder = "/data/gent/vo/000/gvo00074/ED_common_data/met/CB/extracted"
+in.path = "/Users/quan/projects/driver/ED_common_data/met/CB/ERA5/" # "/data/gent/vo/000/gvo00074/ED_common_data/met/CB/"
+start_date = "2000-01-01"
+end_date = "2005-12-31"
+outfolder = "/Users/quan/projects/driver/output/CB/extracted"
 in.prefix = "ERA5_"
 newsite = "YGB"
 vars = NULL
@@ -133,14 +133,30 @@ tryCatch({
 })
 
 saveRDS(point.data,"TS_YGB.RDS")
+#
+# nc <- ncdf4::nc_open('/Users/quan/projects/driver/output/CB/extracted/ERA5_YGB_1/ERA5.1.2000.nc')
+# start_year <- lubridate::year(start_date)
+# end_year <- lubridate::year(end_date)
+# year_seq <- seq(start_year, end_year)
+# day_secs <- PEcAn.utils::ud_convert(1, "day", "seconds")
+#
+# tdays <- nc$dim$time$vals
+# tdays[2928]
+# sec <- PEcAn.utils::ud_convert(tdays, unlist(strsplit(nc$dim$time$units, " "))[1], "seconds")
+# dt <- drop(unique(diff(sec)))
+#
+# doy <- floor(tdays) + 1
+# invalid_doy <- doy < 1 | doy > PEcAn.utils::days_in_year(2000,
+#                                                          leap_year = TRUE)
 
-PEcAn.ED2::met2model.ED2(in.path =  file.path(outfolder,"ERA5_YGB_1"),
-                         in.prefix = "ERA5.1",
-                         outfolder = file.path(outfolder, "ERA5_YGB_1","ED2"),
-                         start_date = start_date,
-                         end_date = end_date,
-                         lat = slat,
-                         lon = slon,
-                         overwrite = TRUE)
+met2model.ED2(in.path =  file.path(outfolder,"ERA5_YGB_1"),
+              in.prefix = "ERA5.1",
+              outfolder = file.path(outfolder, "ERA5_YGB_1","ED2"),
+              start_date = start_date,
+              end_date = end_date,
+              time_interval=24,
+              lat = slat,
+              lon = slon,
+              overwrite = TRUE)
 
 # scp /home/femeunier/Documents/projects/YGB/scripts/process.ERA5.files.R hpc:/data/gent/vo/000/gvo00074/felicien/R

@@ -25,8 +25,8 @@
 ## Run the model historically from 1900:
 1. set NL%IED_INIT_MODE
     `NL%IED_INIT_MODE=6`
-    >- 0: 表示植被将用几棵幼苗（近裸地）初始化
-    >- 6: 用于单个站点时，可以使用历史记录重新启动，常用于使用森林清单数据进行运行的情况
+    >- 0: 表示植被将用几棵幼苗(近裸地)初始化
+    >- 6: 用于单个站点时,可以使用历史记录重新启动,常用于使用森林清单数据进行运行的情况
 
 2. set historical file path in ED2IN
     > to the dir of historical file
@@ -44,17 +44,17 @@
 
 
 # Census: Run the model with inventory data
-模型的初始化就是给每个模拟单元中的sites，patch和cohort都设置相应的属性参数。
-将森林调查数据作为输入，就是将每个地块对应上一个patch， patch上的每棵树对应一个cohort。
+模型的初始化就是给每个模拟单元中的sites,patch和cohort都设置相应的属性参数.
+将森林调查数据作为输入,就是将每个地块对应上一个patch, patch上的每棵树对应一个cohort.
 
 1. set NL%IED_INIT_MODE
     `NL%IED_INIT_MODE=6`
-    >- 0: 表示植被将用几棵幼苗（近裸地）初始化
-    >- 6: 用于单个站点时，可以使用历史记录重新启动，常用于使用森林清单数据进行运行的情况
+    >- 0: 表示植被将用几棵幼苗(近裸地)初始化
+    >- 6: 用于单个站点时,可以使用历史记录重新启动,常用于使用森林清单数据进行运行的情况
 
 2. preparing pss and css file
     - Patch file: *.pss
-        > 每行该site里包含的一个patch，记录了patch的基本信息
+        > 每行该site里包含的一个patch,记录了patch的基本信息
         > area表明该patch占整体site的比例
 
         ```R
@@ -62,7 +62,7 @@
         2015 1 2 0 1 0 0.15 5 5 4.546 0 0 0 0 0 0
         ```
     - Cohort file: *.css
-        > 每行中，每棵树都被当作一个cohort
+        > 每行中,每棵树都被当作一个cohort
         > n: Local (within-patch) stem density.
 
         ```R
